@@ -1,0 +1,15 @@
+{
+  "name": "postcard",
+  "version": "1.0.0",
+  "description": "Example Ext JS Webmail Interface",
+  "main": "server.js",
+  "scripts": {
+    "start": "sencha app watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.10.2",
+    "sqlite3": "^3.0.4"
+  }
+}
