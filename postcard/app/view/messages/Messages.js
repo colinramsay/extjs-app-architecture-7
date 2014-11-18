@@ -1,6 +1,8 @@
 Ext.define('Postcard.view.messages.Messages', {
     extend: 'Ext.Panel',
     xtype: 'messages',
+    controller: 'messages',
+    viewModel: 'messages',
     bbar: [
     '->',
     {
@@ -8,7 +10,7 @@ Ext.define('Postcard.view.messages.Messages', {
     }],
     items: [{
         xtype: 'dataview',
-        store: messageStore,
+        bind: '{messages}',
         flex: 1,
         cls: 'message-view',
         tpl: new Ext.XTemplate('<tpl for=".">',

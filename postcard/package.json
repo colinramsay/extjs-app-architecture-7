@@ -4,7 +4,8 @@
   "description": "Example Ext JS Webmail Interface",
   "main": "server.js",
   "scripts": {
-    "start": "sencha app watch"
+    "server": "node server.js",
+    "watch": "sencha app watch"
   },
   "author": "",
   "license": "ISC",

@@ -6,9 +6,7 @@ Ext.define('Postcard.view.main.MainModel', {
 
     alias: 'viewmodel.main',
 
-    data: {
-        name: 'Postcard'
+    stores: {
+        
     }
-
-    //TODO - add data, formulas and/or methods to support your view
 });

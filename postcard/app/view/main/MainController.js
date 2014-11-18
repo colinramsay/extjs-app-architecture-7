@@ -7,10 +7,21 @@
  */
 Ext.define('Postcard.view.main.MainController', {
     extend: 'Ext.app.ViewController',
+    alias: 'controller.main',
 
-    requires: [
-        'Ext.MessageBox'
-    ],
+    listen: {
+        controller: {
+            '*': {
+                threadselected: function(threadId) {
+                    this.lookupReference('composer').hide();
+                    this.lookupReference('messages').show();
+                },
 
-    alias: 'controller.main'
+                newmessage: function() {
+                    this.lookupReference('messages').hide();
+                    this.lookupReference('composer').show();
+                }
+            }
+        }
+    }
 });

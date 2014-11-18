@@ -11,6 +11,8 @@ Ext.define('Postcard.Application', {
     controllers: [
         'Postcard.controller.Root'
     ],
+
+    requires: ['Postcard.view.main.Main'],
     
     launch: function () {
         // TODO - Launch the application
