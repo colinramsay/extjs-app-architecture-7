@@ -11,10 +11,12 @@ Ext.define('Postcard.view.composer.Composer', {
             valueField: 'id',
             displayField: 'label',
             bind: {
-                store: '{contacts}'
+                store: '{contacts}',
+                value: '{newMessage.people}'
             }
         },
-        { xtype: 'htmleditor' }
+        { xtype: 'textfield', bind: '{newMessage.subject}' , width: '100%' },
+        { xtype: 'htmleditor', bind: { value: '{newMessage.body}' } }
     ],
     bbar: [
         '->',

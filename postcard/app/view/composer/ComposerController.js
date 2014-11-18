@@ -6,17 +6,15 @@ Ext.define('Postcard.view.composer.ComposerController', {
             'button': {
                 click: function() {
                     var session = this.getSession(),
-                        viewModel = this.getViewModel(),
-                        selectedPage = viewModel.getData().newMessage
+                        data = this.getViewModel().get('newMessage');
 
                     var newMessage = session.createRecord('Postcard.model.Message', {
-                        people: 'me',
-                        subject: 'test',
-                        body: 'test body',
+                        people: data.people,
+                        subject: data.subject,
+                        body: data.body,
                         threadId: null
                     });
 
-                    session.getChanges();
                     session.getSaveBatch().start();
                 }
             }

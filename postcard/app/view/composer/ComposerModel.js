@@ -10,5 +10,9 @@ Ext.define('Postcard.view.Composer.ComposerModel', {
         contacts: {
             type: 'contacts'
         }
+    },
+
+    data: {
+        newMessage: null
     }
 });
