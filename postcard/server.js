@@ -17,6 +17,17 @@ app.use(function(req, res, next) {
 });
 
 
+app.get('/contact', function(req, res) {
+    res.json({
+        contacts: [
+            { id: 1, name: 'Colin Ramsay', email: 'colin@somewhere.com', label: 'Colin <colin@somewhere.com>' },
+            { id: 2, name: 'Thomas Sharpe', email: 'tom@nowhere.org', label: 'Thomas <tom@nowhere.com>' }
+        ]
+    });
+});
+
+
+
 app.get('/thread', function(req, res) {
     var data = {
         threads: [
