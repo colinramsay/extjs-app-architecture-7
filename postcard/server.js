@@ -1,12 +1,42 @@
 var sqlite3 = require('sqlite3').verbose(),
-    express = require('express');
+    express = require('express'),
+    fs = require('fs');
 
 var DB_PATH = 'email.db',
     db = new sqlite3.Database(DB_PATH),
-    //exists = fs.existsSync(DB_PATH),
+    exists = fs.existsSync(DB_PATH),
     port = process.env.PORT || 3000;
 
 var app = express();
+
+db.serialize(function() {
+    if(!exists) {
+        db.run('CREATE TABLE `Messages` (\
+            `Id`    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\
+            `People`    TEXT NOT NULL,\
+            `Subject`   TEXT,\
+            `Body`  TEXT,\
+            `Date`  TEXT NOT NULL\
+        );');
+
+        db.run('CREATE TABLE `Threads` (\
+            `Id`    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\
+            `People`    TEXT NOT NULL,\
+            `Subject`   TEXT,\
+            `LastMessageOn` TEXT NOT NULL,\
+            `LastMessageSnippet`    TEXT\
+        );');
+
+        db.run('CREATE TABLE `Contacts` (\
+            `Id`    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\
+            `Name`  TEXT,\
+            `Email` TEXT,\
+            `Label` TEXT\
+        );');
+    }
+});
+
+
 
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', 'http://localhost:1841');
@@ -120,12 +150,3 @@ app.get('/message', function(req, res) {
 var server = app.listen(port, function() {
     console.log('Listening on port %d', server.address().port);
 });
-
-
-// db.serialize(function() {
-//     // Initial database setup.
-//     if(!exists) {
-//         db.run('CREATE TABLE Messages (thing TEXT)');
-//     }
-// });
-
