@@ -81,6 +81,18 @@ app.get('/thread', function(req, res) {
     res.json(data);
 })
 
+app.post('/message', function(req, res) {
+    var stmt = db.prepare("INSERT INTO Messages (Id, People, Subject, Body, Date) VALUES (?, ?, ?, ?, ?)");
+
+    stmt.run(null, 'one', 'two', 'three', 'four', function() {
+        db.get("SELECT last_insert_rowid() as lastId", function(err, row) {
+            console.log(row.lastId);
+        })
+    });
+
+    stmt.finalize();
+    res.json({});
+});
 
 app.get('/message', function(req, res) {
     console.log('responding to request for messages %s', req.query.threadId);

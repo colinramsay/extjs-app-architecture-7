@@ -3,6 +3,8 @@ Ext.define('Postcard.view.composer.Composer', {
     xtype: 'composer',
     cls: 'composer',
     viewModel: 'composer',
+    controller: 'composer',
+    session: true,
     items: [
         {
             fieldLabel: 'To', xtype: 'combo', width: '100%',

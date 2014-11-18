@@ -12,6 +12,7 @@ Ext.define('Postcard.view.main.Main', {
     plugins: 'viewport',
     controller: 'main',
     viewModel: 'main',
+    session: true,
 
     layout: {
         type: 'hbox',
