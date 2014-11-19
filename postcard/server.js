@@ -1,6 +1,7 @@
 var sqlite3 = require('sqlite3').verbose(),
     express = require('express'),
-    fs = require('fs');
+    fs = require('fs'),
+    bodyParser = require('body-parser');
 
 var DB_PATH = 'email.db',
     db = new sqlite3.Database(DB_PATH),
@@ -8,6 +9,8 @@ var DB_PATH = 'email.db',
     port = process.env.PORT || 3000;
 
 var app = express();
+
+app.use(bodyParser.json());
 
 db.serialize(function() {
     if(!exists) {
@@ -84,7 +87,7 @@ app.get('/thread', function(req, res) {
 app.post('/message', function(req, res) {
     var stmt = db.prepare("INSERT INTO Messages (Id, People, Subject, Body, Date) VALUES (?, ?, ?, ?, ?)");
 
-    stmt.run(null, 'one', 'two', 'three', 'four', function() {
+    stmt.run(null, req.body.people, req.body.subject, req.body.body, (new Date()).toUTCString(), function() {
         db.get("SELECT last_insert_rowid() as lastId", function(err, row) {
             console.log(row.lastId);
         })

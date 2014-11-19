@@ -4,7 +4,6 @@ A webmail application in Ext JS 5.
 
 #TODO
 
-- Save use real message data on server side
 - Create new thread when creating new message
 - Refresh views when creating message/thread
 - Reply to existing thread
