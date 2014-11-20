@@ -28,7 +28,10 @@ Ext.define('Postcard.view.main.Main', {
             flex: 1,
             activeItem: null,
             defaults: { hidden: true },
-            items: [{ xtype: 'composer', reference: 'composer' }, { xtype: 'messages', reference: 'messages' } ]
+            items: [
+                { xtype: 'messages', reference: 'messages' },
+                { xtype: 'composer', reference: 'composer' }
+            ]
         }
     ]
 });

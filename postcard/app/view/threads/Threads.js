@@ -8,6 +8,7 @@ Ext.define('Postcard.view.threads.Threads', {
     border: true,
     deferEmptyText: false,
     emptyText: 'No messages',
+    autoScroll: true,
     tpl: new Ext.XTemplate('<tpl for=".">',
         '<div class="thread">',
             '<div class="date">{lastMessageOn:date("H:m")}</div>',
