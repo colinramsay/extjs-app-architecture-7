@@ -76,16 +76,18 @@ app.post('/message', function(req, res) {
     db.run(insertQuery, params, function insertCallback() {
         res.json({
             success: true,
-            messageId: this.lastID
+            messages: [{
+                id: this.lastID
+            }]
         });    
     });    
 });
 
 
 app.get('/message', function(req, res) {
-    var selectQuery = "SELECT Id as id, People as people, Subject as subject, Body as body, Date as date, ParentId as parentId  FROM Messages WHERE ParentId = ?";
+    var selectQuery = "SELECT Id as id, People as people, Subject as subject, Body as body, Date as date, ParentId as parentId  FROM Messages WHERE ParentId = ? OR Id = ?";
 
-    db.get(selectQuery, req.query.parentId, function(err, result) {
+    db.get(selectQuery, req.query.parentId, req.query.parentId, function(err, result) {
         res.json({
             messages: result
         });

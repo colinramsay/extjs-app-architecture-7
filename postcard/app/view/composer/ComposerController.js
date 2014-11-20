@@ -15,7 +15,9 @@ Ext.define('Postcard.view.composer.ComposerController', {
                         threadId: null
                     });
 
-                    session.getSaveBatch().start();
+                    session.getSaveBatch().start().on('complete', function(batch, operation) {
+                        this.fireEvent('threadselected', operation.getRecords()[0].getId());
+                    }, this);
                 }
             }
         }
