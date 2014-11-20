@@ -9,11 +9,10 @@ Ext.define('Postcard.view.messages.MessagesController', {
     listen: {
         controller: {
             '*': {
-                threadselected: function(threadId) {
-                    console.debug('threadselected');
+                threadselected: function(parentId) {
                     this.getViewModel().get('messages').load({
                         params: {
-                            threadId: threadId
+                            parentId: parentId
                         }
                     });
                 }
