@@ -22,6 +22,10 @@ Ext.define('Postcard.view.messages.MessagesController', {
         component: {
             'button': {
                 click: 'onReplyClick'
+            },
+
+            'combo': {
+                change: 'onTagChange'
             }
         }
     },
@@ -30,5 +34,13 @@ Ext.define('Postcard.view.messages.MessagesController', {
     onReplyClick: function() {
         this.fireEvent('reply');
         this.lookupReference('replyButton').hide();
+    },
+
+
+    onTagChange: function(combo, newValue) {
+        var threadParent = this.getViewModel().data.messages.getAt(0);
+
+        threadParent.set('tag', newValue);
+        threadParent.save();
     }
 });

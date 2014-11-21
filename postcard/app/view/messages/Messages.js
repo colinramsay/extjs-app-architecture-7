@@ -5,11 +5,16 @@ Ext.define('Postcard.view.messages.Messages', {
     viewModel: 'messages',
     autoScroll: true,
     bbar: [
-    '->',
-    {
-        text: 'Reply',
-        reference: 'replyButton'
-    }],
+        {
+            xtype: 'combobox', displayField: 'name', idField: 'name',
+            editable: false, queryMode: 'local', value: 'Inbox', forceSelection: true, bind: { store: '{tags}' }
+        },
+        '->',
+        {
+            text: 'Reply',
+            reference: 'replyButton'
+        }
+    ],
     items: [{
         xtype: 'dataview',
         bind: '{messages}',

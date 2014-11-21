@@ -12,6 +12,11 @@ var app = express();
 
 app.use(bodyParser.json());
 
+function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
+
 db.serialize(function() {
     if(!exists) {
         db.run('CREATE TABLE `Messages` (\
@@ -70,26 +75,41 @@ app.get('/thread', function(req, res) {
 })
 
 app.post('/message', function(req, res) {
-    var insertQuery = "INSERT INTO Messages (Id, People, Subject, Body, Date, ParentId) VALUES ($id, $people, $subject, $body, $date, $parentId)",
-        params = {
-            $id: null,
-            $people: req.body.people,
-            $subject: req.body.subject,
-            $body: req.body.body,
-            $date: (new Date()).toUTCString(),
-            $parentId: req.body.parentId,
-            $tag: req.body.parentId ? null : 'Sent'
-        };
 
-    db.run(insertQuery, params, function insertCallback() {
+    if(req.body.id) {
+        var updateQuery = "UPDATE Messages SET Tag = $tag WHERE Id = $id",
+            params = {
+                $id: req.body.id,
+                $tag: req.body.tag
+            };
 
-        res.json({
-            success: true,
-            messages: [{
-                id: this.lastID
-            }]
-        });    
-    });    
+        db.run(updateQuery, params, function updateCallback() {
+            res.json({
+                sucess: true
+            });
+        });
+    } else {
+        var insertQuery = "INSERT INTO Messages (Id, People, Subject, Body, Date, ParentId) VALUES ($id, $people, $subject, $body, $date, $parentId)",
+            params = {
+                $id: null,
+                $people: req.body.people,
+                $subject: req.body.subject,
+                $body: req.body.body,
+                $date: (new Date()).toUTCString(),
+                $parentId: req.body.parentId,
+                $tag: req.body.parentId ? null : 'Sent'
+            };
+
+        db.run(insertQuery, params, function insertCallback() {
+
+            res.json({
+                success: true,
+                messages: [{
+                    id: this.lastID
+                }]
+            });    
+        });
+    }
 });
 
 

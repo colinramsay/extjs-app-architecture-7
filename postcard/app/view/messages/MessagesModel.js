@@ -4,6 +4,10 @@ Ext.define('Postcode.view.messages.MessagesModel', {
     stores: {
         messages: {
             type: 'messages'
+        },
+
+        tags: {
+            type: 'tags'
         }
     }
 });
