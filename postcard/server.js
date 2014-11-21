@@ -55,7 +55,7 @@ app.get('/contact', function(req, res) {
 
 
 app.get('/thread', function(req, res) {
-    db.all("SELECT Id as id, People as people, Subject as subject, Body as lastMessageSnippet, Date as lastMessageOn, ParentId as parentId FROM Messages WHERE ParentId IS NULL", function(err, result) {
+    db.all("SELECT Id as id, People as people, Subject as subject, Body as lastMessageSnippet, Date as lastMessageOn, ParentId as parentId FROM Messages WHERE ParentId IS NULL ORDER BY Date DESC", function(err, result) {
         res.json({
             threads: result
         });
