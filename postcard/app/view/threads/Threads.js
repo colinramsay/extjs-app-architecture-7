@@ -14,7 +14,7 @@ Ext.define('Postcard.view.threads.Threads', {
             '<div class="date">{lastMessageOn:date("H:m")}</div>',
             '<div class="details">',
                 '<div class="header">{people} - {subject}</div>',
-                '<div class="body">{body}</div>',
+                '<div class="body">{lastMessageSnippet}</div>',
             '</div>',
         '</div>',
     '</tpl>'),
