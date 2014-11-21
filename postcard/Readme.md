@@ -4,7 +4,6 @@ A webmail application in Ext JS 5.
 
 #TODO
 
-- Reply to existing thread
 - Tie ID of contact into thread/message rather than just strings
 - Add tag(s)
 - Create new contact

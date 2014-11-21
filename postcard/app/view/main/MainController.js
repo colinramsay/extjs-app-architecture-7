@@ -12,16 +12,24 @@ Ext.define('Postcard.view.main.MainController', {
     listen: {
         controller: {
             '*': {
-                threadselected: function(threadId) {
+                threadselected: function(parentId) {
+                    this.parentId = parentId;
                     this.lookupReference('composer').hide();
                     this.lookupReference('messages').show();
                 },
 
                 newmessage: function() {
                     this.lookupReference('messages').hide();
-                    this.lookupReference('composer').show();
-                }
+                    this.lookupReference('composer').showForNew();
+                },
+
+                reply: 'onReply'
             }
         }
+    },
+
+
+    onReply: function() {
+        this.lookupReference('composer').showForReply(this.parentId);
     }
 });

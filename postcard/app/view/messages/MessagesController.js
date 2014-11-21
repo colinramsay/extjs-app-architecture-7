@@ -17,6 +17,18 @@ Ext.define('Postcard.view.messages.MessagesController', {
                     });
                 }
             }
+        },
+
+        component: {
+            'button': {
+                click: 'onReplyClick'
+            }
         }
+    },
+
+
+    onReplyClick: function() {
+        this.fireEvent('reply');
+        this.lookupReference('replyButton').hide();
     }
 });

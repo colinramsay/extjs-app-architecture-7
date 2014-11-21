@@ -13,6 +13,6 @@ Ext.define('Postcard.view.Composer.ComposerModel', {
     },
 
     data: {
-        newMessage: null
+        newMessage: {}
     }
 });

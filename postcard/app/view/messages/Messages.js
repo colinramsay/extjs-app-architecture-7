@@ -7,7 +7,8 @@ Ext.define('Postcard.view.messages.Messages', {
     bbar: [
     '->',
     {
-        text: 'Reply'
+        text: 'Reply',
+        reference: 'replyButton'
     }],
     items: [{
         xtype: 'dataview',
@@ -24,5 +25,11 @@ Ext.define('Postcard.view.messages.Messages', {
             '</div>',
         '</tpl>'),
         itemSelector: '.message'
-    }]
+    }],
+
+    
+    show: function() {
+        this.down('button').show();
+        this.callParent(arguments);
+    }
 });

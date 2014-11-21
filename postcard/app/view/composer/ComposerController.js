@@ -12,11 +12,15 @@ Ext.define('Postcard.view.composer.ComposerController', {
                         people: data.people,
                         subject: data.subject,
                         body: data.body,
-                        threadId: null
+                        parentId: data.parentId
                     });
 
                     session.getSaveBatch().start().on('complete', function(batch, operation) {
-                        this.fireEvent('threadselected', operation.getRecords()[0].getId());
+                        var record = operation.getRecords()[0],
+                            id = record.getId(),
+                            parentId = record.get('parentId');
+
+                        this.fireEvent('threadselected', parentId || id);
                     }, this);
                 }
             }
