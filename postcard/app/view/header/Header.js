@@ -3,6 +3,7 @@ Ext.define('Postcard.view.header.Header', {
     xtype: 'app-header',
     height: 60,
     controller: 'header',
+    viewModel: 'header',
     items: [
         { xtype: 'container', cls: 'title', html: 'Postcard' },
         ' ',
@@ -10,6 +11,6 @@ Ext.define('Postcard.view.header.Header', {
         '->',
         { xtype: 'button', text: 'New Message' },
         ' ',
-        { xtype: 'combobox' }
+        { xtype: 'combobox', displayField: 'name', idField: 'name', editable: false, queryMode: 'local', value: 'Inbox', forceSelection: true, bind: { store: '{tags}' } }
     ]
 });

@@ -20,6 +20,7 @@ db.serialize(function() {
             `Subject`   TEXT,\
             `Body`  TEXT,\
             `Date`  TEXT NOT NULL,\
+            `Tag`   TEXT,\
             `ParentId` INTEGER NOT NULL\
         );');
 
@@ -53,6 +54,12 @@ app.get('/contact', function(req, res) {
 });
 
 
+app.get('/tag', function(req, res) {
+    db.all('SELECT DISTINCT Tag as name FROM Messages WHERE Tag IS NOT NULL', function(err, result) {
+        res.json(result);
+    });
+});
+
 
 app.get('/thread', function(req, res) {
     db.all("SELECT Id as id, People as people, Subject as subject, Body as lastMessageSnippet, Date as lastMessageOn, ParentId as parentId FROM Messages WHERE ParentId IS NULL ORDER BY Date DESC", function(err, result) {
@@ -70,7 +77,8 @@ app.post('/message', function(req, res) {
             $subject: req.body.subject,
             $body: req.body.body,
             $date: (new Date()).toUTCString(),
-            $parentId: req.body.parentId
+            $parentId: req.body.parentId,
+            $tag: req.body.parentId ? null : 'Sent'
         };
 
     db.run(insertQuery, params, function insertCallback() {
