@@ -3,7 +3,14 @@ Ext.define('Postbox.view.threads.ThreadsModel', {
     alias: 'viewmodel.threads',
     stores: {
         threads: {
-            type: 'threads'
+            type: 'threads',
+            remoteFilter: true,
+            filters: [
+                {
+                    property: 'tag',
+                    value: '{currentTag}'
+                }
+            ]
         }
     }
 });

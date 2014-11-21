@@ -67,7 +67,12 @@ app.get('/tag', function(req, res) {
 
 
 app.get('/thread', function(req, res) {
-    db.all("SELECT Id as id, People as people, Subject as subject, Body as lastMessageSnippet, Date as lastMessageOn, ParentId as parentId FROM Messages WHERE ParentId IS NULL ORDER BY Date DESC", function(err, result) {
+    var filters = JSON.parse(req.query.filter),
+        tag = filters.filter(function(f) { return f.property === 'tag'; })[0].value;
+
+    console.log('Getting threads with tag %s', tag);
+
+    db.all("SELECT Id as id, People as people, Subject as subject, Body as lastMessageSnippet, Date as lastMessageOn, ParentId as parentId FROM Messages WHERE ParentId IS NULL AND Tag = ? ORDER BY Date DESC", tag, function(err, result) {
         res.json({
             threads: result
         });

@@ -11,6 +11,6 @@ Ext.define('Postcard.view.header.Header', {
         '->',
         { xtype: 'button', text: 'New Message' },
         ' ',
-        { xtype: 'combobox', displayField: 'name', idField: 'name', editable: false, queryMode: 'local', value: 'Inbox', forceSelection: true, bind: { store: '{tags}' } }
+        { xtype: 'combobox', displayField: 'name', idField: 'name', editable: false, queryMode: 'local', forceSelection: true, bind: { store: '{tags}', value: '{currentTag}' } }
     ]
 });
