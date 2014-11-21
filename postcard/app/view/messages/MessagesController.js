@@ -41,6 +41,11 @@ Ext.define('Postcard.view.messages.MessagesController', {
         var threadParent = this.getViewModel().data.messages.getAt(0);
 
         threadParent.set('tag', newValue);
-        threadParent.save();
+        threadParent.save({
+            callback: function() {
+                this.fireEvent('refreshthreads');
+            },
+            scope: this
+        });
     }
 });

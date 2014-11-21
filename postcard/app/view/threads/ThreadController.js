@@ -10,6 +10,15 @@ Ext.define('Postcard.view.threads.ThreadsController', {
                     this.fireEvent('threadselected', record.getId());
                 }
             }
+        },
+
+
+        controller: {
+            '*': {
+                refreshthreads: function() {
+                    this.getViewModel().data.threads.reload();
+                }
+            }
         }
     }
 });
