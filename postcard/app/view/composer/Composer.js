@@ -9,7 +9,7 @@ Ext.define('Postcard.view.composer.Composer', {
         { xtype: 'hiddenfield', bind: '{newMessage.parentId}' },
         {
             fieldLabel: 'To', xtype: 'combo', width: '100%',
-            valueField: 'id',
+            valueField: 'label',
             displayField: 'label',
             bind: {
                 store: '{contacts}',

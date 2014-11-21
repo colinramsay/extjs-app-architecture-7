@@ -5,7 +5,7 @@ Ext.define('Postcard.model.BaseModel', {
         namespace: 'Postcard.model',
         urlPrefix: 'http://localhost:3000',
         proxy: {
-            type: 'ajax',
+            type: 'rest',
             url: '{prefix}/{entityName:uncapitalize}'
         }
     },
