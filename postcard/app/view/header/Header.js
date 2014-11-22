@@ -6,33 +6,43 @@ Ext.define('Postcard.view.header.Header', {
     controller: 'header',
     viewModel: 'header',
 
-    initComponent: function() {
-        this.callParent(arguments);
-        
-        var hiddenCfg = {
+
+    items: [
+        { xtype: 'home-button', cls: 'title', html: 'Postcard', bind: { hidden: '{menuExpanded}' } },
+        { xtype: 'tbspacer', bind: { hidden: '{menuExpanded}' } },
+        { 
+            xtype: 'textfield', flex: 1, cls: 'search-box', emptyText: 'Search', 
+            bind: '{searchTerm}',
             plugins: ['responsive'],
             responsiveConfig: {
-                'tall': { hidden: true }, 
+                'tall': { hidden: true, bind: { hidden: '{!menuExpanded}' } }, 
                 'wide': { hidden: false } 
             }
-        };
+        },
+        { xtype: 'tbfill', bind: { hidden: '{menuExpanded}' } },
+        { 
+            xtype: 'combobox', flex: 1, 
+            displayField: 'name', idField: 'name', editable: false,
+            queryMode: 'local', forceSelection: true,
+            bind: {
+                store: '{tags}', value: '{currentTag}'
+            },
+            plugins: ['responsive'],
+            responsiveConfig: {
+                'tall': { hidden: true, bind: { hidden: '{!menuExpanded}' } }, 
+                'wide': { hidden: false } 
+            }
+        },
 
-        var shownCfg = {
+        { xtype: 'button', cls: 'new-message', text: 'New Message', bind: { hidden: '{menuExpanded}' } },
+
+        { 
+            text: 'Menu', cls: 'menu', width: 30, enableToggle: true,
             plugins: ['responsive'],
             responsiveConfig: {
                 'tall': { hidden: false }, 
                 'wide': { hidden: true } 
             }
-        };
-
-        this.add({ xtype: 'home-button', cls: 'title', html: 'Postcard' });
-        
-        this.add(' ');
-        this.add(Ext.apply({ flex: 1,xtype: 'textfield', cls: 'search-box', emptyText: 'Search', bind: '{searchTerm}' }, hiddenCfg));
-        this.add('->');
-        this.add(Ext.apply({ flex: 1,xtype: 'combobox', displayField: 'name', idField: 'name', editable: false, queryMode: 'local', forceSelection: true, bind: { store: '{tags}', value: '{currentTag}' } }, hiddenCfg));
-        
-        this.add({ xtype: 'button', cls: 'new-message', text: 'New Message' });
-        this.add(Ext.apply({ width: 30, text: 'Menu', cls: 'menu', enableToggle: true }, shownCfg));
-    }
+        }
+    ]
 });

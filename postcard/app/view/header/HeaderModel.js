@@ -5,5 +5,9 @@ Ext.define('Postcard.view.header.HeaderModel', {
         tags: {
             type: 'tags'
         }
+    },
+
+    data: {
+        menuExpanded: false
     }
 });
