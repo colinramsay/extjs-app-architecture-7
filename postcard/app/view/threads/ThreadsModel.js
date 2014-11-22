@@ -9,7 +9,11 @@ Ext.define('Postbox.view.threads.ThreadsModel', {
                 {
                     property: 'tag',
                     value: '{currentTag}'
-                }
+                },
+                {
+                    property: 'searchTerm',
+                    value: '%{searchTerm}%'
+                },
             ]
         }
     }

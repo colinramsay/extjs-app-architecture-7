@@ -7,6 +7,7 @@ Ext.define('Postcard.view.main.MainModel', {
     alias: 'viewmodel.main',
 
     data: {
-        currentTag: 'Inbox'
+        currentTag: 'Inbox',
+        searchTerm: null
     }
 });

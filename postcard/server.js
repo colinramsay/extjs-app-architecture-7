@@ -68,11 +68,21 @@ app.get('/tag', function(req, res) {
 
 app.get('/thread', function(req, res) {
     var filters = JSON.parse(req.query.filter),
-        tag = filters.filter(function(f) { return f.property === 'tag'; })[0].value;
+        tag = filters.filter(function(f) { return f.property === 'tag'; })[0].value,
+        searchTerm = filters.filter(function(f) { return f.property === 'searchTerm'; })[0].value,
+        params = {
+            $tag: tag
+        },
+        query = 'SELECT Id as id, People as people, Subject as subject, Body as lastMessageSnippet, Date as lastMessageOn, ParentId as parentId FROM Messages WHERE ParentId IS NULL AND Tag = $tag';
 
-    console.log('Getting threads with tag %s', tag);
+    if(searchTerm) {
+        query += ' AND (People LIKE $searchTerm OR Subject LIKE $searchTerm OR Body LIKE $searchTerm) ';
+        params['$searchTerm'] = searchTerm;
+    }
 
-    db.all("SELECT Id as id, People as people, Subject as subject, Body as lastMessageSnippet, Date as lastMessageOn, ParentId as parentId FROM Messages WHERE ParentId IS NULL AND Tag = ? ORDER BY Date DESC", tag, function(err, result) {
+    query += ' ORDER BY Date DESC ';
+
+    db.all(query, params, function(err, result) {
         res.json({
             threads: result
         });

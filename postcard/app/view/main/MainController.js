@@ -13,23 +13,21 @@ Ext.define('Postcard.view.main.MainController', {
         controller: {
             '*': {
                 threadselected: function(parentId) {
-                    this.parentId = parentId;
-                    this.lookupReference('composer').hide();
-                    this.lookupReference('messages').show();
+                    this.getView().threadSelected(parentId);
                 },
 
                 newmessage: function() {
-                    this.lookupReference('messages').hide();
-                    this.lookupReference('composer').showForNew();
+                    this.getView().newMessage();  
                 },
 
-                reply: 'onReply'
+                reply: function() {
+                    this.getView().reply();
+                },
+
+                navigatehome: function() {
+                    this.getView().setActiveItem(0);
+                }
             }
         }
-    },
-
-
-    onReply: function() {
-        this.lookupReference('composer').showForReply(this.parentId);
     }
 });

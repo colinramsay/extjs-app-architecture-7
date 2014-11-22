@@ -9,17 +9,27 @@ Ext.define('Postcard.view.main.Main', {
         'Postcard.view.header.Header'
     ],
     xtype: 'app-main',
-    plugins: 'viewport',
+    plugins: ['viewport', 'responsive'],
     controller: 'main',
     viewModel: 'main',
     session: true,
 
-    layout: {
-        type: 'hbox',
-        align: 'stretch'
-    },
-
     dockedItems: [{ xtype: 'app-header' }],
+
+    responsiveConfig: {
+        'tall': {
+            layout: {
+                type: 'card'
+            }
+        },
+
+        'wide': {
+            layout: {
+                type: 'hbox',
+                align: 'stretch'
+            }
+        }
+    },
 
     items: [
         { xtype: 'threads', flex: 1 },
@@ -33,5 +43,32 @@ Ext.define('Postcard.view.main.Main', {
                 { xtype: 'composer', reference: 'composer' }
             ]
         }
-    ]
+    ],
+
+
+    isCard: function() {
+        return this.getLayout().type === 'card';
+    },
+
+
+    reply: function() {
+        this.lookupReference('composer').showForReply(this.parentId);
+    },
+
+
+    newMessage: function() {
+        this.lookupReference('messages').hide();
+        this.lookupReference('composer').showForNew();
+    },
+
+
+    threadSelected: function(parentId) {
+        if(this.isCard()) {
+            this.setActiveItem(1);
+        }
+
+        this.parentId = parentId;
+        this.lookupReference('composer').hide();
+        this.lookupReference('messages').show();
+    }
 });
