@@ -6,6 +6,7 @@ Ext.define('Postcard.view.login.LoginController', {
         component: {
             'button': {
                 click: function() {
+                    window.localStorage.setItem('loggedin', true);
                     this.redirectTo('home');
                 }
             }

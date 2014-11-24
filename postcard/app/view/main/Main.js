@@ -6,7 +6,10 @@ Ext.define('Postcard.view.main.Main', {
     viewModel: 'main',
     session: true,
 
-    dockedItems: [{ xtype: 'app-header' }],
+    dockedItems: [
+        { xtype: 'app-header' },
+        { dock: 'bottom', xtype: 'button', cls: 'logout', text: 'Logout' }
+    ],
 
     responsiveConfig: {
         'tall': {

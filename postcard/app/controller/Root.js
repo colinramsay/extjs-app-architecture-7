@@ -3,15 +3,31 @@ Ext.define('Postcard.controller.Root', {
     extend: 'Ext.app.Controller',
 
     routes: {
-        'home': 'onHome'
+        'home': 'onHome',
+        '': 'checkLogin'
     },
 
-    onLaunch: function () {
-        this.loginWindow = Ext.create('Postcard.view.login.Login');
+    onLaunch: function() {
+        this.checkLogin();
+    },
+
+    checkLogin: function() {
+        if(!window.localStorage.getItem('loggedin')) {
+            this.loginWindow = Ext.create('Postcard.view.login.Login');
+        } else {
+            this.runMain();
+        }
     },
 
     onHome: function() {
-        this.loginWindow.destroy();
+        if(this.loginWindow) {
+            this.loginWindow.destroy();
+        }
+
+        this.checkLogin();
+    },
+
+    runMain: function() {
         Ext.create('Postcard.view.main.Main');
     }
 });
