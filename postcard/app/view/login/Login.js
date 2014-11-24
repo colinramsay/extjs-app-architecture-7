@@ -5,7 +5,7 @@ Ext.define('Postcard.view.login.Login',{
     title: 'Login to Postcard',
     closable: false,
     autoShow: true,
-    
+    cls: 'login',
     controller: 'login',
     viewModel: 'login',
     items: [{

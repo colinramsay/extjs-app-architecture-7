@@ -8,7 +8,7 @@ Ext.define('Postcard.view.main.Main', {
 
     dockedItems: [
         { xtype: 'app-header' },
-        { dock: 'bottom', xtype: 'button', cls: 'logout', text: 'Logout' }
+        { dock: 'bottom', xtype: 'button', cls: 'logout', overCls: '', focusCls: '', text: 'Logout' }
     ],
 
     responsiveConfig: {
