@@ -21,19 +21,12 @@ db.serialize(function() {
     if(!exists) {
         db.run('CREATE TABLE `Messages` (\
             `Id`    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\
-            `People`    TEXT NOT NULL,\
+            `People`    TEXT,\
             `Subject`   TEXT,\
             `Body`  TEXT,\
             `Date`  TEXT NOT NULL,\
             `Tag`   TEXT,\
-            `ParentId` INTEGER NOT NULL\
-        );');
-
-        db.run('CREATE TABLE `Contacts` (\
-            `Id`    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\
-            `Name`  TEXT,\
-            `Email` TEXT,\
-            `Label` TEXT\
+            `ParentId` INTEGER\
         );');
     }
 });
@@ -50,17 +43,19 @@ app.use(function(req, res, next) {
 
 
 app.get('/contact', function(req, res) {
-    res.json({
-        contacts: [
-            { id: 1, name: 'Colin Ramsay', email: 'colin@somewhere.com', label: 'Colin <colin@somewhere.com>' },
-            { id: 2, name: 'Thomas Sharpe', email: 'tom@nowhere.org', label: 'Thomas <tom@nowhere.com>' }
-        ]
+    db.all('SELECT DISTINCT People as email FROM Messages', function(err, result) {
+        res.json({
+            contacts: result
+        });
     });
 });
 
 
 app.get('/tag', function(req, res) {
     db.all('SELECT DISTINCT Tag as name FROM Messages WHERE Tag IS NOT NULL', function(err, result) {
+        result.push({ name: 'Inbox' });
+        result.push({ name: 'Archive' });
+        result.push({ name: 'Sent' });
         res.json(result);
     });
 });
@@ -83,9 +78,7 @@ app.get('/thread', function(req, res) {
     query += ' ORDER BY Date DESC ';
 
     db.all(query, params, function(err, result) {
-        res.json({
-            threads: result
-        });
+        res.json(result);
     });
 })
 
@@ -134,12 +127,10 @@ app.post('/message', function(req, res) {
 
 
 app.get('/message', function(req, res) {
-    var selectQuery = "SELECT Id as id, People as people, Subject as subject, Body as body, Date as date, ParentId as parentId  FROM Messages WHERE ParentId = ? OR Id = ?";
+    var selectQuery = "SELECT Id as id, People as people, Subject as subject, Body as body, Date as date, ParentId as parentId, Tag as tag FROM Messages WHERE ParentId = ? OR Id = ?";
 
     db.all(selectQuery, req.query.parentId, req.query.parentId, function(err, result) {
-        res.json({
-            messages: result
-        });
+        res.json(result);
     });
 });
 

@@ -20,10 +20,25 @@ Ext.define('Postcard.view.composer.ComposerController', {
                             id = record.getId(),
                             parentId = record.get('parentId');
 
-                        this.fireEvent('threadselected', parentId || id);
+                        this.redirectTo('thread/' + (parentId || id) + '/messages');
                     }, this);
                 }
             }
+        }
+    },
+
+
+    routes: {
+        'thread/:id/messages': function(id) {
+            this.getView().hide();
+        },
+
+        'thread/:id/messages/new': function(id) {
+            this.getView().showForReply(id);
+        },
+
+        'thread/new': function() {
+            this.getView().showForNew();
         }
     }
 });

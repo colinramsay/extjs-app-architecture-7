@@ -4,14 +4,21 @@ Ext.define('Postcard.view.messages.Messages', {
     controller: 'messages',
     viewModel: 'messages',
     autoScroll: true,
+    session: true,
     bbar: [
         {
             xtype: 'combobox', displayField: 'name', idField: 'name',
-            editable: false, queryMode: 'local', value: 'Inbox', forceSelection: true, bind: { store: '{tags}' }
+            reference: 'tagPicker',
+            queryMode: 'local', value: 'Inbox', bind: { store: '{tags}' }
+        },
+        {
+            text: 'Set Tag',
+            itemId: 'setTag'
         },
         '->',
         {
             text: 'Reply',
+            itemId: 'reply',
             reference: 'replyButton'
         }
     ],
@@ -36,7 +43,9 @@ Ext.define('Postcard.view.messages.Messages', {
 
     
     show: function() {
-        this.down('button').show();
+        this.down('combobox').show();
+        this.query('button')[0].show();
+        this.query('button')[1].show();
         this.callParent(arguments);
     }
 });

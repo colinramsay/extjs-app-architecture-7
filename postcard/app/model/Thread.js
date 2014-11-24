@@ -1,11 +1,11 @@
 Ext.define('Postcard.model.Thread', {
     extend: 'Postcard.model.BaseModel',
     fields: [
-        {name: 'id',    type: 'int'},
-        {name: 'people',  type: 'string'},
-        {name: 'subject', type: 'string'},
+        { name: 'id' },
+        { name: 'people' },
+        { name: 'subject' },
         { name: 'lastMessageOn', type: 'date' },
-        { name: 'lastMessageSnippet', type: 'string' }
+        { name: 'lastMessageSnippet' }
     ],
     proxy: {
         reader: {

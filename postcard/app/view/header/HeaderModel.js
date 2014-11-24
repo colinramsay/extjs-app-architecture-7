@@ -3,11 +3,8 @@ Ext.define('Postcard.view.header.HeaderModel', {
     alias: 'viewmodel.header',
     stores: {
         tags: {
-            type: 'tags'
+            type: 'tags',
+            session: true
         }
-    },
-
-    data: {
-        menuExpanded: false
     }
 });

@@ -7,16 +7,15 @@ Ext.define('Postcard.view.threads.ThreadsController', {
         component: {
             'threads': {
                 itemclick: function(dataview, record) {
-                    this.fireEvent('threadselected', record.getId());
+                    this.redirectTo('thread/' + record.getId() + '/' + 'messages');
                 }
             }
         },
 
-
         controller: {
             '*': {
-                refreshthreads: function() {
-                    this.getViewModel().data.threads.reload();
+                threadschanged: function() {
+                    this.getViewModel().get('threads').reload();
                 }
             }
         }

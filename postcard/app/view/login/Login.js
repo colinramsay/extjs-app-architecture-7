@@ -1,4 +1,3 @@
-
 Ext.define('Postcard.view.login.Login',{
     extend: 'Ext.window.Window',
     xtype: 'login-window',
@@ -9,24 +8,23 @@ Ext.define('Postcard.view.login.Login',{
     
     controller: 'login',
     viewModel: 'login',
-
-    items: {
-        xtype: 'form',
-        reference: 'form',
-        items: [{
-            xtype: 'textfield',
-            name: 'email',
-            bind: '{email}',
-            fieldLabel: 'Email',
-            allowBlank: false
-        }, {
-            xtype: 'textfield',
-            name: 'password',
-            inputType: 'password',
-            fieldLabel: 'Password',
-            allowBlank: false
-        }]
-    },
+    items: [{
+        xtype: 'textfield',
+        name: 'email',
+        bind: '{login.email}',
+        fieldLabel: 'Email',
+        allowBlank: false
+    }, {
+        xtype: 'textfield',
+        bind: '{login.password}',
+        inputType: 'password',
+        fieldLabel: 'Password',
+        allowBlank: false
+    }, {
+        xtype: 'checkbox',
+        bind: '{login.rememberMe}',
+        fieldLabel: 'Remember Me?'
+    }],
 
     buttons: [{ text: 'Login' }]
 });

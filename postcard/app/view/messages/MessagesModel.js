@@ -7,7 +7,8 @@ Ext.define('Postcode.view.messages.MessagesModel', {
         },
 
         tags: {
-            type: 'tags'
+            type: 'tags',
+            session: true
         }
     }
 });

@@ -6,7 +6,7 @@ Ext.define('Postcard.view.login.LoginController', {
         component: {
             'button': {
                 click: function() {
-                    this.fireViewEvent('loginsuccess');
+                    this.redirectTo('home');
                 }
             }
         }

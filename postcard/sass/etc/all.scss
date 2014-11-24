@@ -65,10 +65,11 @@ $gutters: 10px;
 	.details {
 		border-bottom: 1px solid $subdued-grey;
 	}
-}
 
-.message:last-child .details {
-	border-bottom: 0 !important;	
+	&:last-child .details {
+		border-bottom: 0 !important;	
+	}
+
 }
 
 .thread {

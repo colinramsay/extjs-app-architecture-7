@@ -7,43 +7,51 @@ Ext.define('Postcard.view.messages.MessagesController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.messages',
     listen: {
-        controller: {
-            '*': {
-                threadselected: function(parentId) {
-                    this.getViewModel().get('messages').load({
-                        params: {
-                            parentId: parentId
-                        }
-                    });
-                }
-            }
-        },
-
         component: {
-            'button': {
+            '#reply': {
                 click: 'onReplyClick'
             },
 
-            'combo': {
-                change: 'onTagChange'
+            '#setTag': {
+                click: 'onTagChange'
             }
         }
     },
 
+    routes: {
+        'thread/:id/messages': function(id) {
+            this.getViewModel().get('messages').load({
+                params: {
+                    parentId: id
+                },
+                callback: function(records) {
+                    this.getView().show();
+                    //this.lookupReference('tagPicker').setValue(records[0].get('tag'));
+                },
+                scope: this
+            });
+        },
+
+        'thread/new': function() {
+            this.getView().hide();
+        }
+    },
 
     onReplyClick: function() {
-        this.fireEvent('reply');
-        this.lookupReference('replyButton').hide();
+        this.redirectTo(window.location.hash + '/new');
     },
 
 
-    onTagChange: function(combo, newValue) {
-        var threadParent = this.getViewModel().data.messages.getAt(0);
+    onTagChange: function() {
+        var newValue = this.lookupReference('tagPicker').getValue(),
+            threadParent = this.getViewModel().get('messages').getAt(0);
 
         threadParent.set('tag', newValue);
         threadParent.save({
             callback: function() {
-                this.fireEvent('refreshthreads');
+                this.getViewModel().get('tags').reload();
+                this.fireEvent('tagadded');
+                this.fireEvent('threadschanged');
             },
             scope: this
         });

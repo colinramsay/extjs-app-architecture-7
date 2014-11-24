@@ -14,40 +14,16 @@ Ext.define('Postcard.view.threads.Threads', {
             '<div class="date">{lastMessageOn:date("H:m")}</div>',
             '<div class="details">',
                 '<div class="header">{people} - {subject}</div>',
-                '<div class="body">{lastMessageSnippet}</div>',
+                '<div class="body">{[this.stripHtml(values.lastMessageSnippet)]}</div>',
             '</div>',
         '</div>',
-    '</tpl>'),
+    '</tpl>', {
+        stripHtml: function(html) {
+            var div = document.createElement('div');
+            div.innerHTML = html;
+            return div.textContent || div.innerText || '';
+        }
+    }),
     itemSelector: '.thread',
-    tbar: [{
-        text: 'Button',
-        handler: 'onClickButton'
-    }],
-    bind: '{threads}',
-    listeners: {
-        // itemclick: function(dataview, record) {
-        //     var rightPane = Ext.ComponentQuery.query('#rightPane')[0];
-
-        //     var fadeInFn = function() {
-
-        //         rightPane.activeItem = rightPane.getComponent('messages');
-        //         messageStore.loadData(window['messageData' + record.getId()].messages);
-        //         rightPane.activeItem.getEl().setOpacity(0);
-        //         rightPane.activeItem.show();
-        //         rightPane.activeItem.getEl().fadeIn();
-        //         setTimeout(function() {
-        //             rightPane.activeItem.updateLayout();    
-        //         }, 10);
-                
-        //     };
-
-        //     if(rightPane.activeItem) {
-        //         rightPane.activeItem.getEl().fadeOut({
-        //             callback: fadeInFn
-        //         });    
-        //     } else {
-        //         fadeInFn();
-        //     }
-        // }
-    }
+    bind: '{threads}'
 });

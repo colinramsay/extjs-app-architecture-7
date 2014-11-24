@@ -5,24 +5,23 @@ Ext.define('Postcard.view.header.HeaderController', {
         component: {
             'button[cls="new-message"]': {
                 click: function() {
-                    this.fireEvent('newmessage');
+                    this.redirectTo('thread/new');
                 }
-            },
-
-            'button[cls="menu"]': {
-                toggle: 'onMenuToggle'
             },
 
             'home-button': {
                 click: function() {
-                    this.fireEvent('navigatehome');
+                    this.redirectTo('home');
+                }
+            }
+        },
+
+        controller: {
+            '*': {
+                tagadded: function() {
+                    this.getViewModel().get('tags').reload();
                 }
             }
         }
-    },
-
-
-    onMenuToggle: function(btn, pressed) {
-        this.getViewModel().set('menuExpanded', pressed);
     }
 });
