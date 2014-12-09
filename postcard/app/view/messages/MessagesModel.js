@@ -10,5 +10,11 @@ Ext.define('Postcode.view.messages.MessagesModel', {
             type: 'tags',
             session: true
         }
+    },
+
+    formulas: {
+        test: function(get) {
+            return get('messages');
+        }
     }
 });

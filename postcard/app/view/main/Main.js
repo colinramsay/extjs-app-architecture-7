@@ -1,3 +1,4 @@
+// app/view/main/Main.js
 Ext.define('Postcard.view.main.Main', {
     extend: 'Ext.Panel',
     xtype: 'app-main',
@@ -8,7 +9,10 @@ Ext.define('Postcard.view.main.Main', {
 
     dockedItems: [
         { xtype: 'app-header' },
-        { dock: 'bottom', xtype: 'button', cls: 'logout', overCls: '', focusCls: '', text: 'Logout' }
+        { 
+            dock: 'bottom', xtype: 'button', cls: 'logout', 
+            overCls: '', focusCls: '', text: 'Logout'
+        }
     ],
 
     responsiveConfig: {
@@ -31,7 +35,6 @@ Ext.define('Postcard.view.main.Main', {
         {
             xtype: 'container',
             flex: 1,
-            activeItem: null,
             defaults: { hidden: true },
             items: [
                 { xtype: 'messages' },

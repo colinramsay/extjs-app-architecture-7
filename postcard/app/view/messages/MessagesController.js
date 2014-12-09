@@ -1,11 +1,8 @@
-/**
- * @class Postcard.view.messages.MessagesController
- * @extends Ext.app.ViewController
- * Description
- */
+// app/view/messages/MessagesController.js
 Ext.define('Postcard.view.messages.MessagesController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.messages',
+
     listen: {
         component: {
             '#reply': {
@@ -19,34 +16,37 @@ Ext.define('Postcard.view.messages.MessagesController', {
     },
 
     routes: {
-        'thread/:id/messages': function(id) {
-            this.getViewModel().get('messages').load({
-                params: {
-                    parentId: id
-                },
-                callback: function(records) {
-                    this.getView().show();
-                    //this.lookupReference('tagPicker').setValue(records[0].get('tag'));
-                },
-                scope: this
-            });
-        },
+        'thread/:id/messages': 'onShowThread',
+        'thread/new': 'onNewThread'
+    },
 
-        'thread/new': function() {
-            this.getView().hide();
-        }
+    onShowThread:function(id) {
+        this.getViewModel().get('messages').load({
+            params: {
+                parentId: id
+            },
+            callback: function(records) {
+                this.getView().show();
+            },
+            scope: this
+        });
+    },
+
+    onNewThread: function() {
+        this.getView().hide();
     },
 
     onReplyClick: function() {
         this.redirectTo(window.location.hash + '/new');
     },
 
-
     onTagChange: function() {
-        var newValue = this.lookupReference('tagPicker').getValue(),
-            threadParent = this.getViewModel().get('messages').getAt(0);
+        var tagPicker = this.lookupReference('tagPicker'),
+            newTag = tagPicker.getValue(),
+            viewModel = this.getViewModel(),
+            threadParent = viewModel.get('messages').getAt(0);
 
-        threadParent.set('tag', newValue);
+        threadParent.set('tag', newTag);
         threadParent.save({
             callback: function() {
                 this.getViewModel().get('tags').reload();

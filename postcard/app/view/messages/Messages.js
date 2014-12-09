@@ -1,3 +1,4 @@
+// app/view/messages/Messages.js
 Ext.define('Postcard.view.messages.Messages', {
     extend: 'Ext.Panel',
     xtype: 'messages',
@@ -7,9 +8,11 @@ Ext.define('Postcard.view.messages.Messages', {
     session: true,
     bbar: [
         {
-            xtype: 'combobox', displayField: 'name', idField: 'name',
+            xtype: 'combobox', displayField: 'name',
+            idField: 'name',
             reference: 'tagPicker',
-            queryMode: 'local', value: 'Inbox', bind: { store: '{tags}' }
+            queryMode: 'local', value: 'Inbox',
+            bind: { store: '{tags}' }
         },
         {
             text: 'Set Tag',
@@ -39,13 +42,5 @@ Ext.define('Postcard.view.messages.Messages', {
             '</div>',
         '</tpl>'),
         itemSelector: '.message'
-    }],
-
-    
-    show: function() {
-        this.down('combobox').show();
-        this.query('button')[0].show();
-        this.query('button')[1].show();
-        this.callParent(arguments);
-    }
+    }]
 });

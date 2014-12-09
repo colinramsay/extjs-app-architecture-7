@@ -1,6 +1,6 @@
+// app/view/threads/Threads.js
 Ext.define('Postcard.view.threads.Threads', {
     extend: 'Ext.DataView',
-    //requires: ['Postcard.view.threads.ThreadsModel'],
     xtype: 'threads',
     cls: 'thread-view',
     viewModel: 'threads',
@@ -9,6 +9,8 @@ Ext.define('Postcard.view.threads.Threads', {
     deferEmptyText: false,
     emptyText: 'No messages',
     autoScroll: true,
+    itemSelector: '.thread',
+    bind: '{threads}',
     tpl: new Ext.XTemplate('<tpl for=".">',
         '<div class="thread">',
             '<div class="date">{lastMessageOn:date("H:m")}</div>',
@@ -23,7 +25,5 @@ Ext.define('Postcard.view.threads.Threads', {
             div.innerHTML = html;
             return div.textContent || div.innerText || '';
         }
-    }),
-    itemSelector: '.thread',
-    bind: '{threads}'
+    })
 });

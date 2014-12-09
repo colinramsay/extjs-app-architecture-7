@@ -15,7 +15,7 @@ Ext.define('Postcard.controller.Root', {
         if(!window.localStorage.getItem('loggedin')) {
             this.loginWindow = Ext.create('Postcard.view.login.Login');
         } else {
-            this.runMain();
+            Ext.create('Postcard.view.main.Main');
         }
     },
 
@@ -25,9 +25,5 @@ Ext.define('Postcard.controller.Root', {
         }
 
         this.checkLogin();
-    },
-
-    runMain: function() {
-        Ext.create('Postcard.view.main.Main');
     }
 });

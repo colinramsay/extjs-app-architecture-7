@@ -1,8 +1,4 @@
-/**
- * @class Postcard.view.Composer.ComposerModel
- * @extends Ext.app.ViewController
- * Description
- */
+// app/view/composer/ComposerModel.js
 Ext.define('Postcard.view.Composer.ComposerModel', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.composer',

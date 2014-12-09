@@ -1,3 +1,4 @@
+// app/view/header/HeaderController.js
 Ext.define('Postcard.view.header.HeaderController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.header',

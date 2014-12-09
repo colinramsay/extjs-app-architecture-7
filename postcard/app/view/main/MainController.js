@@ -1,12 +1,14 @@
+// app/view/main/MainController.js
 Ext.define('Postcard.view.main.MainController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.main',
 
     routes: {
-        'home': 'onHome',
-        'thread/:id/messages': 'onShowThread'
+        'home': 'showLeftPane',
+        'thread/new': 'showRightPane',
+        'thread/:id/messages': 'showRightPane',
+        'thread/:id/messages/new': 'showRightPane'
     },
-
 
     listen: {
         component: {
@@ -19,10 +21,15 @@ Ext.define('Postcard.view.main.MainController', {
         }
     },
 
-
-    onShowThread: function(id) {
+    showRightPane: function(id) {
         if(this.getView().isCard()) {
-            this.setActiveItem(1);
+            this.getView().setActiveItem(1);
         }
+    },
+
+    showLeftPane: function() {
+        if(this.getView().isCard()) {
+            this.getView().setActiveItem(0);
+        }  
     }
 });

@@ -2,21 +2,12 @@ $subdued-grey: #c8c8c8;
 $gutters: 10px;
 
 $body-font-family: 'Roboto', sans-serif;
-
 $window-base-color: #fff;
 $window-header-color: #000;
 $window-padding: 20px;
 $window-header-font-family: $body-font-family;
-
-.login {
-	.x-form-item-label-default {
-		font-family: $body-font-family;
-	}
-
-	.x-toolbar-footer {
-		background: #fff;
-	}
-}
+$toolbar-footer-background-color: #fff;
+$form-label-font-family: $body-font-family;
 
 
 .title {
@@ -50,7 +41,7 @@ $window-header-font-family: $body-font-family;
 	margin: $gutters;
 }
 
-.thread-view, .message-view {
+.message-view {
 	font-family: $body-font-family;
 	margin: $gutters;
 
@@ -81,7 +72,7 @@ $window-header-font-family: $body-font-family;
 	}
 }
 
-.thread, .message {
+.message {
 
 	&:hover {
 		cursor: pointer;
@@ -99,16 +90,6 @@ $window-header-font-family: $body-font-family;
 
 }
 
-.thread {
-	display: flex;
-	.date {
-		width: 80px;
-		text-align: right;
-	}
-	.details {
-		flex: 1;
-	}
-}
 
 .message {
 	display: flex;

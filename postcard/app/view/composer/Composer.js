@@ -1,3 +1,4 @@
+// app/view/composer/Composer.js
 Ext.define('Postcard.view.composer.Composer', {
     extend: 'Ext.form.Panel',
     xtype: 'composer',
@@ -19,28 +20,21 @@ Ext.define('Postcard.view.composer.Composer', {
             }
         },
         {
-            xtype: 'textfield', fieldLabel: 'Subject', cls: 'subject', emptyText: 'Subject',
+            xtype: 'textfield', fieldLabel: 'Subject',
+            cls: 'subject', emptyText: 'Subject',
             bind: {
-                value: '{newMessage.subject}', hidden: '{newMessage.parentId}'
+                value: '{newMessage.subject}',
+                hidden: '{newMessage.parentId}'
             },
             width: '100%'
         },
-        { xtype: 'htmleditor', bind: { value: '{newMessage.body}' } }
+        {
+            xtype: 'htmleditor',
+            bind: { value: '{newMessage.body}' }
+        }
     ],
     bbar: [
         '->',
         { xtype: 'button', text: 'Send' }
-    ],
-
-
-    showForReply: function(parentId) {
-        this.getViewModel().set('newMessage.parentId', parentId);
-        this.show();
-    },
-
-
-    showForNew: function() {
-        this.getViewModel().set('newMessage.parentId', null);
-        this.show();
-    }
+    ]
 });
