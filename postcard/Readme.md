@@ -1,3 +1,13 @@
 #Postcard
 
 A webmail application in Ext JS 5.
+
+- Install Sencha Command (v5.0.2.270 at time of writing)
+	- http://www.sencha.com/products/sencha-cmd/download
+- Install node.js and npm (v1.4.24 at time of writing)
+	- https://docs.npmjs.com/getting-started/installing-node
+
+Then from this directory ("postcard"):
+
+- Run `npm start`
+- Open http://localhost:1841/ to view the app

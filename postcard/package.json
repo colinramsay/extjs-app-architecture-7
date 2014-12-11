@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "description": "Example Ext JS Webmail Interface",
   "main": "server.js",
+  "repository" : {
+    "type": "git",
+    "url": "https://github.com/colinramsay/extjs-app-architecture-7"
+  },
   "scripts": {
+    "start": "npm run server & npm run watch",
     "server": "node server.js",
     "watch": "sencha app watch"
   },
-  "author": "",
+  "author": "Colin Ramsay",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.9.0",
